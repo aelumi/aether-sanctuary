@@ -47,6 +47,21 @@ def whispers():
 def soulcore():
     return render_template('soulcore.html')
 
+@app.route('/signal', methods=['GET', 'POST'])
+def signal():
+    if request.method == 'POST':
+        entry = request.form.get("entry")
+        with open("signals.txt", "a", encoding="utf-8") as f:
+            f.write(entry + "\n---\n")
+        return redirect('/signal')
+    try:
+        with open("signals.txt", "r", encoding="utf-8") as f:
+            past_signals = f.read()
+    except FileNotFoundError:
+        past_signals = ""
+    return render_template('signal.html', past_signals=past_signals)
+
+
 
 
 if __name__ == '__main__':
