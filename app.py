@@ -42,5 +42,10 @@ def whispers():
         past_whispers = ""
     return render_template('whispers.html', past_whispers=past_whispers)
 
+# Soulcore Page
+@app.route('/soulcore')
+def soulcore():
+    return render_template('soulcore.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
